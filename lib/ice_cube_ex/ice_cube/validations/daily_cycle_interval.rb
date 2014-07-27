@@ -12,7 +12,9 @@ module IceCube
           raise ArgumentError, 'cycle has to be a value higher than repeat'
         end
 
-        replace_validations_for(:interval, [Validation.new(@interval, @cycle, @repeat)])
+        @cycle_percentage = ((@repeat.to_f / @cycle.to_f) * 100).to_i
+        replace_validations_for \
+          :interval, [Validation.new(@interval, @cycle, @repeat)]
         clobber_base_validations(:wday, :day)
         self
       end
@@ -53,9 +55,9 @@ module IceCube
         end
 
         def build_ical(builder)
-          builder['FREQ']     << 'DAILY_CYCLE (CUSTOM RULE)'
-          builder['CYCLE']    << cycle
-          builder['REPEAT']   << repeat
+          builder['FREQ']   << 'DAILY_CYCLE (CUSTOM RULE)'
+          builder['CYCLE']  << cycle
+          builder['REPEAT'] << repeat
         end
       end
 

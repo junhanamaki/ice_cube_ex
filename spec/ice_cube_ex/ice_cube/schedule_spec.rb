@@ -34,7 +34,7 @@ describe IceCube::Schedule do
             expect(second_occurrence).to eq(Time.new(2012, 2, 5, 12))
           end
 
-          it 'returns 8-2-2012 at 12am as third occurrence' do
+          it 'returns 8-2-2012 at 12am as third occurrence', test: true do
             expect(third_occurrence).to eq(Time.new(2012, 2, 8, 12))
           end
 
