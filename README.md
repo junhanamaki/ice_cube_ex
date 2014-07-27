@@ -39,7 +39,7 @@ repeat counting from the start of the cycle. For example, if we want to repeat
       s.rrule IceCubeEx::Rule.daily_cycle(5, 3)
     end
 
-Now just calculate next_occurrence:
+Now try calculating some next occurrences:
 
     occurrence_time = schedule.next_occurrence(Time.new(2014-12-30))
     # returns 2015-1-1
