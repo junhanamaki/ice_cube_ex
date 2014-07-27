@@ -11,9 +11,6 @@ module IceCubeEx
       reset
     end
 
-    #
-    # cycle_start_time and why we start from one day before:
-    #
     # given the following case:
     #
     #   Schedule start_time 2014-2-2, DailyCycleRule with cycle 4, repeat 2
@@ -27,7 +24,7 @@ module IceCubeEx
     #
     #   2014-2-2, 2014-2-3, 2014-2-4
     #
-    # so to avoid this we start counting from start_time - 1.day
+    # so to avoid this we start counting from start_time - 1.day (cycle_start_time)
     def next_time(time, schedule, closing_time)
       @time = time
       @schedule = schedule
