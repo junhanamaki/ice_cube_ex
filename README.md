@@ -1,5 +1,6 @@
 # IceCubeEx
 
+[![Gem Version](https://badge.fury.io/rb/ice_cube_ex.svg)](http://badge.fury.io/rb/ice_cube_ex)
 [![build](https://travis-ci.org/junhanamaki/ice_cube_ex.svg?branch=master)](https://travis-ci.org/junhanamaki/ice_cube_ex)
 [![Code Climate](https://codeclimate.com/github/junhanamaki/ice_cube_ex.png)](https://codeclimate.com/github/junhanamaki/ice_cube_ex)
 [![Test Coverage](https://codeclimate.com/github/junhanamaki/ice_cube_ex/coverage.png)](https://codeclimate.com/github/junhanamaki/ice_cube_ex)
@@ -26,7 +27,41 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Requiring ice_cube_ex adds news type of rules which can be used in ice_cube
+schedule:
+
+### DailyCycleRule
+
+This rule allows to specify a cycle (in number of days), and the number of
+repeat counting from the start of the cycle. For example, if we want to repeat
+3 days, every 5 days, starting from 2015-1-1 we would do:
+
+    schedule = IceCube::Schedule.new(Time.new(2015, 1, 1)) do |s|
+      s.rrule IceCubeEx::Rule.daily_cycle(5, 3)
+    end
+
+Now just calculate next_occurrence:
+
+    occurrence_time = schedule.next_occurrence(Time.new(2014-12-30))
+    # returns 2015-1-1
+
+    occurrence_time = schedule.next_occurrence(occurrence_time)
+    # returns 2015-1-2
+
+    occurrence_time = schedule.next_occurrence(occurrence_time)
+    # returns 2015-1-3
+
+    occurrence_time = schedule.next_occurrence(occurrence_time)
+    # returns 2015-1-6
+
+    occurrence_time = schedule.next_occurrence(occurrence_time)
+    # returns 2015-1-7
+
+    occurrence_time = schedule.next_occurrence(occurrence_time)
+    # returns 2015-1-8
+
+You can also use count and until to limit your rule as you would normally do
+with a regular ice_cube rule.
 
 ## Contributing
 

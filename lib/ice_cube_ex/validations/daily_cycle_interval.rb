@@ -1,4 +1,4 @@
-module IceCube
+module IceCubeEx
   module Validations
     module DailyCycleInterval
       attr_accessor :rule
@@ -12,36 +12,20 @@ module IceCube
           raise ArgumentError, 'cycle has to be a value higher than repeat'
         end
 
-        @cycle_percentage = ((@repeat.to_f / @cycle.to_f) * 100).to_i
+        @acceptable_cycle_percentage = ((@repeat.to_f / @cycle.to_f) * 100).to_i
         replace_validations_for \
           :interval, [Validation.new(@interval, @cycle, @repeat)]
         clobber_base_validations(:wday, :day)
         self
       end
 
-      class Validation
-        attr_reader :interval, :cycle, :repeat
+      class Validation < IceCube::Validations::DailyInterval::Validation
+        attr_reader :cycle, :repeat
 
         def initialize(interval, cycle, repeat)
-          @interval = interval
+          super(interval)
           @cycle    = cycle
           @repeat   = repeat
-        end
-
-        def type
-          :day
-        end
-
-        def dst_adjust?
-          true
-        end
-
-        def validate(step_time, schedule)
-          t0, t1 = schedule.start_time, step_time
-          days = Date.new(t1.year, t1.month, t1.day) -
-                 Date.new(t0.year, t0.month, t0.day)
-          offset = (days % interval).nonzero?
-          interval - offset if offset
         end
 
         def build_s(builder)

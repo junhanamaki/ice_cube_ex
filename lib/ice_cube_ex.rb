@@ -7,4 +7,4 @@ end
 module IceCubeEx
 end
 
-require 'ice_cube_ex/ice_cube/rule'
+require 'ice_cube_ex/rule'

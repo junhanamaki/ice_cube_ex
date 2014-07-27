@@ -1,6 +1,6 @@
-require 'ice_cube_ex/ice_cube/rules/daily_cycle_rule'
+require 'ice_cube_ex/rules/daily_cycle_rule'
 
-module IceCube
+module IceCubeEx
   class Rule
     class << self
       # DailyCycle Rule

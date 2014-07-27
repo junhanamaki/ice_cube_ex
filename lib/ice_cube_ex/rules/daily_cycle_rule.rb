@@ -1,7 +1,7 @@
-require 'ice_cube_ex/ice_cube/validations/daily_cycle_interval'
+require 'ice_cube_ex/validations/daily_cycle_interval'
 
-module IceCube
-  class DailyCycleRule < ValidatedRule
+module IceCubeEx
+  class DailyCycleRule < IceCube::ValidatedRule
     include Validations::DailyCycleInterval
 
     def initialize(cycle, repeat)
@@ -34,14 +34,14 @@ module IceCube
       cycle_start_time = schedule.start_time - 24 * 60 * 60
 
       return nil unless find_acceptable_time_before(closing_time)
-      day_count = number_of_days_between(@time, cycle_start_time)
-      acceptable_time_percentage = calculate_cycle_percentage(day_count)
+      number_of_days = number_of_days_between(@time, cycle_start_time)
+      acceptable_time_percentage = calculate_percentage(number_of_days)
 
-      until acceptable_time_percentage <= @cycle_percentage
+      until acceptable_time_percentage <= @acceptable_cycle_percentage
         @time += 1
         return nil unless find_acceptable_time_before(closing_time)
-        day_count = number_of_days_between(@time, cycle_start_time)
-        acceptable_time_percentage = calculate_cycle_percentage(day_count)
+        number_of_days = number_of_days_between(@time, cycle_start_time)
+        acceptable_time_percentage = calculate_percentage(number_of_days)
       end
 
       @uses += 1 if @time
@@ -59,7 +59,7 @@ module IceCube
       Time.new(time.year, time.month, time.day, 0, 0, 0, '+00:00')
     end
 
-    def calculate_cycle_percentage(day_count)
+    def calculate_percentage(day_count)
       value = (day_count.to_f / @cycle.to_f)
       percentage = ((value - value.to_i) * 100).to_i
       percentage.zero? ? 100 : percentage

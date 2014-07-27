@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe IceCube::DailyCycleRule do
+describe IceCubeEx::DailyCycleRule do
   describe '.new' do
     context 'given cycle argument bellow 2' do
       let(:cycle)  { 0 }
@@ -8,7 +8,7 @@ describe IceCube::DailyCycleRule do
 
       it 'raises error' do
         expect do
-          IceCube::DailyCycleRule.new(cycle, repeat)
+          IceCubeEx::DailyCycleRule.new(cycle, repeat)
         end.to raise_error
       end
     end
@@ -19,7 +19,7 @@ describe IceCube::DailyCycleRule do
 
       it 'raises error' do
         expect do
-          IceCube::DailyCycleRule.new(cycle, repeat)
+          IceCubeEx::DailyCycleRule.new(cycle, repeat)
         end.to raise_error
       end
     end
