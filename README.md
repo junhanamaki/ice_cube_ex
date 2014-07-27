@@ -1,5 +1,8 @@
 # IceCubeEx
 
+[![Code Climate](https://codeclimate.com/github/junhanamaki/ice_cube_ex.png)](https://codeclimate.com/github/junhanamaki/ice_cube_ex)
+[![Test Coverage](https://codeclimate.com/github/junhanamaki/ice_cube_ex/coverage.png)](https://codeclimate.com/github/junhanamaki/ice_cube_ex)
+
 Extends gem [ice_cube](https://github.com/seejohnrun/ice_cube) to handle
 custom rules, not handled by iCalendar spec.
 
