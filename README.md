@@ -27,8 +27,7 @@ Or install it yourself as:
 
 ## Usage
 
-Requiring ice_cube_ex adds news type of rules which can be used in ice_cube
-schedule:
+ice_cube_ex has new rules that can be used with ice_cube's schedules:
 
 ### DailyCycleRule
 
