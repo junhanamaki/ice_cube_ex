@@ -5,8 +5,8 @@ module IceCube
 
       def cycle(cycle, repeat)
         @interval = 1
-        @repeat   = repeat
-        @cycle    = normalized_cycle(cycle)
+        @repeat   = normalize(repeat)
+        @cycle    = normalize(cycle)
 
         unless @repeat < @cycle
           raise ArgumentError, 'cycle has to be a value higher than repeat'
@@ -61,19 +61,10 @@ module IceCube
 
     private
 
-      def normalized_cycle(cycle)
-        cycle.to_i.tap do |val|
+      def normalize(arg)
+        arg.to_i.tap do |val|
           unless val > 1
-            raise ArgumentError, "'#{cycle}' is not a valid input for cycle. " \
-                                 "Please pass an integer higher than 1."
-          end
-        end
-      end
-
-      def normalized_repeat(repeat)
-        repeat.to_i.tap do |val|
-          unless val > 1
-            raise ArgumentError, "'#{repeat}' is not a valid input for repeat. " \
+            raise ArgumentError, "'#{arg}' is not a valid argument. " \
                                  "Please pass an integer higher than 1."
           end
         end
