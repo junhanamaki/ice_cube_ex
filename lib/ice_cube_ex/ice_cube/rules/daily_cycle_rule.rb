@@ -4,15 +4,13 @@ module IceCube
   class DailyCycleRule < ValidatedRule
     include Validations::DailyCycleInterval
 
-    def initialize(interval, cycle)
+    def initialize(cycle, repeat)
       super
-      interval(interval, cycle)
+      cycle(cycle, repeat)
       schedule_lock(:hour, :min, :sec)
       reset
     end
 
-    # Compute the next time after (or including) the specified time in respect
-    # to the given schedule
     def next_time(time, schedule, closing_time)
       @time = time
       @schedule = schedule

@@ -3,25 +3,27 @@ module IceCube
     module DailyCycleInterval
       attr_accessor :rule
 
-      def interval(interval, cycle)
-        @interval = normalized_interval(interval)
+      def cycle(cycle, repeat)
+        @interval = 1
+        @repeat   = repeat
         @cycle    = normalized_cycle(cycle)
 
-        unless @interval < @cycle
-          raise ArgumentError, 'cycle has to be a value higher than interval'
+        unless @repeat < @cycle
+          raise ArgumentError, 'cycle has to be a value higher than repeat'
         end
 
-        replace_validations_for(:interval, [Validation.new(@interval, @cycle)])
+        replace_validations_for(:interval, [Validation.new(@interval, @cycle, @repeat)])
         clobber_base_validations(:wday, :day)
         self
       end
 
       class Validation
-        attr_reader :interval, :cycle
+        attr_reader :interval, :cycle, :repeat
 
-        def initialize(interval, cycle)
+        def initialize(interval, cycle, repeat)
           @interval = interval
           @cycle    = cycle
+          @repeat   = repeat
         end
 
         def type
@@ -41,18 +43,19 @@ module IceCube
         end
 
         def build_s(builder)
-          builder.base = "Every #{cycle} days, repeat #{interval} times"
+          builder.base = "Every #{cycle} days, repeat #{repeat} times"
         end
 
         def build_hash(builder)
           builder[:interval] = interval
           builder[:cycle]    = cycle
+          builder[:repeat]   = repeat
         end
 
         def build_ical(builder)
           builder['FREQ']     << 'DAILY_CYCLE (CUSTOM RULE)'
-          builder['INTERVAL'] << interval
           builder['CYCLE']    << cycle
+          builder['REPEAT']   << repeat
         end
       end
 
@@ -62,6 +65,15 @@ module IceCube
         cycle.to_i.tap do |val|
           unless val > 1
             raise ArgumentError, "'#{cycle}' is not a valid input for cycle. " \
+                                 "Please pass an integer higher than 1."
+          end
+        end
+      end
+
+      def normalized_repeat(repeat)
+        repeat.to_i.tap do |val|
+          unless val > 1
+            raise ArgumentError, "'#{repeat}' is not a valid input for repeat. " \
                                  "Please pass an integer higher than 1."
           end
         end

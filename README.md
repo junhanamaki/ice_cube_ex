@@ -6,7 +6,7 @@
 [![Dependency Status](https://gemnasium.com/junhanamaki/ice_cube_ex.svg)](https://gemnasium.com/junhanamaki/ice_cube_ex)
 
 Extends gem [ice_cube](https://github.com/seejohnrun/ice_cube) to handle
-custom rules, not handled by iCalendar spec.
+custom rules, outside of the iCalendar spec.
 
 ## Installation
 
