@@ -1,6 +1,6 @@
 module IceCubeEx
   module Validations
-    module DailyCycleInterval
+    module DayCycleInterval
       attr_accessor :rule
 
       def cycle(cycle, repeat)
@@ -39,7 +39,7 @@ module IceCubeEx
         end
 
         def build_ical(builder)
-          builder['FREQ']   << 'DAILY_CYCLE (CUSTOM RULE)'
+          builder['FREQ']   << 'DAY_CYCLE (CUSTOM RULE)'
           builder['CYCLE']  << cycle
           builder['REPEAT'] << repeat
         end

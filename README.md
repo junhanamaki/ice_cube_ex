@@ -29,14 +29,14 @@ Or install it yourself as:
 
 ice_cube_ex has new rules that can be used with ice_cube's schedules:
 
-### DailyCycleRule
+### DayCycleRule
 
 This rule allows to specify a cycle (in number of days), and the number of
 repeat counting from the start of the cycle. For example, if we want to repeat
 3 days, every 5 days, starting from 2015-1-1 we would do:
 
     schedule = IceCube::Schedule.new(Time.new(2015, 1, 1)) do |s|
-      s.rrule IceCubeEx::Rule.daily_cycle(5, 3)
+      s.rrule IceCubeEx::Rule.day_cycle(5, 3)
     end
 
 Now try calculating some next occurrences:

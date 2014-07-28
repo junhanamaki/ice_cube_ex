@@ -1,8 +1,8 @@
-require 'ice_cube_ex/validations/daily_cycle_interval'
+require 'ice_cube_ex/validations/day_cycle_interval'
 
 module IceCubeEx
-  class DailyCycleRule < IceCube::ValidatedRule
-    include Validations::DailyCycleInterval
+  class DayCycleRule < IceCube::ValidatedRule
+    include Validations::DayCycleInterval
 
     def initialize(cycle, repeat)
       super
@@ -13,7 +13,7 @@ module IceCubeEx
 
     # given the following case:
     #
-    #   Schedule start_time 2014-2-2, DailyCycleRule with cycle 4, repeat 2
+    #   Schedule start_time 2014-2-2, DayCycleRule with cycle 4, repeat 2
     #
     # if we invoke schedule.next_occurrence(2014-2-1), first calculated
     # time will be 2014-2-2, which will give a day_count of 0, thus being lower

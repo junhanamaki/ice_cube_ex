@@ -13,12 +13,12 @@ describe IceCube::Schedule do
         end
       end
 
-      context 'given rule of type DailyCycleRule initialized to ' \
+      context 'given rule of type DayCycleRule initialized to ' \
               'every 4 days (cycle), ' \
               'repeat 2 days (repeat)' do
         let(:repeat) { 2 }
         let(:cycle)  { 4 }
-        let(:rule)   { IceCubeEx::DailyCycleRule.new(cycle, repeat) }
+        let(:rule)   { IceCubeEx::DayCycleRule.new(cycle, repeat) }
 
         context 'calculating from 3-2-2012' do
           let(:from) { Time.new(2012, 2, 3) }
@@ -55,14 +55,14 @@ describe IceCube::Schedule do
         end
       end
 
-      context 'given rule of type DailyCycleRule initialized to ' \
+      context 'given rule of type DayCycleRule initialized to ' \
               'every 4 days (cycle), ' \
               'repeat 2 days (repeat), ' \
               'which repeats 3 times (count)' do
         let(:repeat) { 2 }
         let(:cycle)  { 4 }
         let(:count)  { 3 }
-        let(:rule)   { IceCubeEx::DailyCycleRule.new(cycle, repeat).count(3) }
+        let(:rule)   { IceCubeEx::DayCycleRule.new(cycle, repeat).count(3) }
 
         context 'calculating from 3-2-2012' do
           let(:from) { Time.new(2012, 2, 3) }
@@ -89,7 +89,7 @@ describe IceCube::Schedule do
         end
       end
 
-      context 'given rule of type DailyCycleRule initialized to ' \
+      context 'given rule of type DayCycleRule initialized to ' \
               'every 4 days (cycle), ' \
               'repeat 2 days (repeat), ' \
               'which repeats until 6-2-2012' do
@@ -97,7 +97,7 @@ describe IceCube::Schedule do
         let(:cycle)        { 4 }
         let(:repeat_until) { Time.new(2012, 2, 6) }
         let(:rule) do
-          IceCubeEx::DailyCycleRule.new(cycle, repeat).until(repeat_until)
+          IceCubeEx::DayCycleRule.new(cycle, repeat).until(repeat_until)
         end
 
         context 'calculating from 3-2-2012' do
@@ -120,12 +120,12 @@ describe IceCube::Schedule do
         end
       end
 
-      context 'given rule of type DailyCycleRule initialized to ' \
+      context 'given rule of type DayCycleRule initialized to ' \
               'every 4 days (cycle), ' \
               'repeat 2 days (repeat)' do
         let(:repeat) { 2 }
         let(:cycle)  { 4 }
-        let(:rule)   { IceCubeEx::DailyCycleRule.new(cycle, repeat) }
+        let(:rule)   { IceCubeEx::DayCycleRule.new(cycle, repeat) }
 
         context 'given serialized and deserialized schedule with YAML' do
           before do
