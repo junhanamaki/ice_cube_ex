@@ -31,15 +31,16 @@ ice_cube_ex has new rules that can be used with ice_cube's schedules:
 
 ### DayCycleRule
 
-This rule allows to specify a cycle (in number of days), and the number of
-repeat counting from the start of the cycle. For example, if we want to repeat
-3 days, every 5 days, starting from 2015-1-1 we would do:
+This rule allows to specify a number of days, which indicates a cycle, and
+another number of days to skip inside that cycle.
+For example, we want an event that starts at 2015-1-1 to recur every 5 days
+while skipping the last 3 days, we would do something like this:
 
     schedule = IceCube::Schedule.new(Time.new(2015, 1, 1)) do |s|
       s.rrule IceCubeEx::Rule.day_cycle(5, 3)
     end
 
-Now try calculating some next occurrences:
+Now try calculating next occurrences:
 
     occurrence_time = schedule.next_occurrence(Time.new(2014-12-30))
     # returns 2015-1-1

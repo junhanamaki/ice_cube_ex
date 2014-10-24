@@ -8,11 +8,14 @@ module IceCubeEx
         @skip     = normalize(skip)
         @cycle    = normalize(cycle)
 
-        unless @skip != @cycle
-          raise ArgumentError, "cycle and skip can't have the same value"
+        unless @skip < @cycle
+          raise ArgumentError, "we can't skip more days than the number of "   \
+                               "days in the cycle, so skip has to be a value " \
+                               "bellow cycle"
         end
 
-        @acceptable_cycle_percentage = ((@skip.to_f / @cycle.to_f) * 100).to_i
+        @acceptable_cycle_percentage = \
+          (((@cycle - @skip).to_f / @cycle.to_f) * 100).to_i
         replace_validations_for \
           :interval, [Validation.new(@interval, @cycle, @skip)]
         clobber_base_validations(:wday, :day)
