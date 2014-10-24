@@ -8,6 +8,5 @@ else
   CodeClimate::TestReporter.start
 end
 
-require 'pry'
 require 'ice_cube'
 require 'ice_cube_ex'

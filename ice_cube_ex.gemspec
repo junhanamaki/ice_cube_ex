@@ -25,6 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'simplecov', '~> 0.9'
   spec.add_development_dependency 'codeclimate-test-reporter', '~> 0.3'
-  spec.add_development_dependency 'jazz_hands', '~> 0.5'
   spec.add_development_dependency 'ice_cube', '~> 0.12'
 end
