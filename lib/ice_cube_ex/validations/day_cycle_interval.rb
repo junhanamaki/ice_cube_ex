@@ -3,45 +3,43 @@ module IceCubeEx
     module DayCycleInterval
       attr_accessor :rule
 
-      def cycle(cycle, repeat)
+      def cycle(cycle, skip)
         @interval = 1
-        @repeat   = normalize(repeat)
+        @skip     = normalize(skip)
         @cycle    = normalize(cycle)
 
-        unless @repeat < @cycle
-          raise ArgumentError, 'cycle has to be a value higher than repeat'
+        unless @skip < @cycle
+          raise ArgumentError, 'cycle has to be a value higher than skip'
         end
 
-        @acceptable_cycle_percentage = ((@repeat.to_f / @cycle.to_f) * 100).to_i
+        @acceptable_cycle_percentage = ((@skip.to_f / @cycle.to_f) * 100).to_i
         replace_validations_for \
-          :interval, [Validation.new(@interval, @cycle, @repeat)]
+          :interval, [Validation.new(@interval, @cycle, @skip)]
         clobber_base_validations(:wday, :day)
         self
       end
 
       class Validation < IceCube::Validations::DailyInterval::Validation
-        attr_reader :cycle, :repeat
+        attr_reader :cycle, :skip
 
-        def initialize(interval, cycle, repeat)
+        def initialize(interval, cycle, skip)
           super(interval)
           @cycle    = cycle
-          @repeat   = repeat
+          @skip   = skip
         end
 
         def build_s(builder)
-          builder.base = "Every #{cycle} days, repeat #{repeat} times"
+          builder.base = "Every #{cycle} days, skip #{skip} times"
         end
 
         def build_hash(builder)
           builder[:interval] = interval
           builder[:cycle]    = cycle
-          builder[:repeat]   = repeat
+          builder[:skip]     = skip
         end
 
         def build_ical(builder)
-          builder['FREQ']   << 'DAY_CYCLE (CUSTOM RULE)'
-          builder['CYCLE']  << cycle
-          builder['REPEAT'] << repeat
+          builder['FREQ'] << 'DAY_CYCLE (CUSTOM RULE)'
         end
       end
 

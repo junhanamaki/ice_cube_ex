@@ -4,8 +4,8 @@ module IceCubeEx
   class Rule
     class << self
       # DayCycle Rule
-      def day_cycle(interval, cycle)
-        DayCycleRule.new(interval, cycle)
+      def day_cycle(cycle, skip)
+        DayCycleRule.new(cycle, skip)
       end
     end
   end

@@ -4,16 +4,16 @@ module IceCubeEx
   class DayCycleRule < IceCube::ValidatedRule
     include Validations::DayCycleInterval
 
-    def initialize(cycle, repeat)
+    def initialize(cycle, skip)
       super
-      cycle(cycle, repeat)
+      cycle(cycle, skip)
       schedule_lock(:hour, :min, :sec)
       reset
     end
 
     # given the following case:
     #
-    #   Schedule start_time 2014-2-2, DayCycleRule with cycle 4, repeat 2
+    #   Schedule start_time 2014-2-2, DayCycleRule with cycle 4, skip 2
     #
     # if we invoke schedule.next_occurrence(2014-2-1), first calculated
     # time will be 2014-2-2, which will give a day_count of 0, thus being lower
