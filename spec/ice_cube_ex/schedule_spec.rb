@@ -15,10 +15,10 @@ describe IceCube::Schedule do
 
       context 'given rule of type DayCycleRule initialized to ' \
               'every 4 days (cycle), ' \
-              'repeat 2 days (repeat)' do
-        let(:repeat) { 2 }
-        let(:cycle)  { 4 }
-        let(:rule)   { IceCubeEx::DayCycleRule.new(cycle, repeat) }
+              'skip 2 days  (skip)' do
+        let(:cycle) { 4 }
+        let(:skip)  { 2 }
+        let(:rule)  { IceCubeEx::DayCycleRule.new(cycle, skip) }
 
         context 'calculating from 3-2-2012' do
           let(:from) { Time.new(2012, 2, 3) }
@@ -37,7 +37,7 @@ describe IceCube::Schedule do
             expect(second_occurrence).to eq(Time.new(2012, 2, 5, 12))
           end
 
-          it 'returns 8-2-2012 at 12am as third occurrence', test: true do
+          it 'returns 8-2-2012 at 12am as third occurrence' do
             expect(third_occurrence).to eq(Time.new(2012, 2, 8, 12))
           end
 
@@ -45,7 +45,7 @@ describe IceCube::Schedule do
             expect(fourth_occurrence).to eq(Time.new(2012, 2, 9, 12))
           end
 
-          it 'returns 12-2-2012 at 12am as fifth occurrence', test: true do
+          it 'returns 12-2-2012 at 12am as fifth occurrence' do
             expect(fifth_occurrence).to eq(Time.new(2012, 2, 12, 12))
           end
 
@@ -57,12 +57,12 @@ describe IceCube::Schedule do
 
       context 'given rule of type DayCycleRule initialized to ' \
               'every 4 days (cycle), ' \
-              'repeat 2 days (repeat), ' \
+              'skip 2 days (skip), ' \
               'which repeats 3 times (count)' do
-        let(:repeat) { 2 }
-        let(:cycle)  { 4 }
-        let(:count)  { 3 }
-        let(:rule)   { IceCubeEx::DayCycleRule.new(cycle, repeat).count(3) }
+        let(:cycle) { 4 }
+        let(:skip)  { 2 }
+        let(:count) { 3 }
+        let(:rule)  { IceCubeEx::DayCycleRule.new(cycle, skip).count(3) }
 
         context 'calculating from 3-2-2012' do
           let(:from) { Time.new(2012, 2, 3) }
@@ -79,7 +79,7 @@ describe IceCube::Schedule do
             expect(second_occurrence).to eq(Time.new(2012, 2, 5, 12))
           end
 
-          it 'returns 8-2-2012 at 12am as third occurrence', test: true do
+          it 'returns 8-2-2012 at 12am as third occurrence' do
             expect(third_occurrence).to eq(Time.new(2012, 2, 8, 12))
           end
 
@@ -91,13 +91,13 @@ describe IceCube::Schedule do
 
       context 'given rule of type DayCycleRule initialized to ' \
               'every 4 days (cycle), ' \
-              'repeat 2 days (repeat), ' \
+              'skip 2 days (skip), ' \
               'which repeats until 6-2-2012' do
-        let(:repeat)       { 2 }
         let(:cycle)        { 4 }
+        let(:skip)         { 2 }
         let(:repeat_until) { Time.new(2012, 2, 6) }
         let(:rule) do
-          IceCubeEx::DayCycleRule.new(cycle, repeat).until(repeat_until)
+          IceCubeEx::DayCycleRule.new(cycle, skip).until(repeat_until)
         end
 
         context 'calculating from 3-2-2012' do
@@ -114,7 +114,7 @@ describe IceCube::Schedule do
             expect(second_occurrence).to eq(Time.new(2012, 2, 5, 12))
           end
 
-          it 'returns nil as third occurrence', test: true do
+          it 'returns nil as third occurrence' do
             expect(third_occurrence).to eq(nil)
           end
         end
@@ -122,10 +122,10 @@ describe IceCube::Schedule do
 
       context 'given rule of type DayCycleRule initialized to ' \
               'every 4 days (cycle), ' \
-              'repeat 2 days (repeat)' do
-        let(:repeat) { 2 }
-        let(:cycle)  { 4 }
-        let(:rule)   { IceCubeEx::DayCycleRule.new(cycle, repeat) }
+              'skip 2 days (skip)' do
+        let(:cycle) { 4 }
+        let(:skip)  { 2 }
+        let(:rule)  { IceCubeEx::DayCycleRule.new(cycle, skip) }
 
         context 'given serialized and deserialized schedule with YAML' do
           before do
@@ -149,7 +149,7 @@ describe IceCube::Schedule do
               expect(second_occurrence).to eq(Time.new(2012, 2, 5, 12))
             end
 
-            it 'returns 8-2-2012 at 12am as third occurrence', test: true do
+            it 'returns 8-2-2012 at 12am as third occurrence' do
               expect(third_occurrence).to eq(Time.new(2012, 2, 8, 12))
             end
 
@@ -157,7 +157,7 @@ describe IceCube::Schedule do
               expect(fourth_occurrence).to eq(Time.new(2012, 2, 9, 12))
             end
 
-            it 'returns 12-2-2012 at 12am as fifth occurrence', test: true do
+            it 'returns 12-2-2012 at 12am as fifth occurrence' do
               expect(fifth_occurrence).to eq(Time.new(2012, 2, 12, 12))
             end
 
