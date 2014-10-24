@@ -32,13 +32,13 @@ module IceCubeEx
 
       return nil unless find_acceptable_time_before(closing_time)
       number_of_days = number_of_days_between(@time, cycle_start_time)
-      acceptable_time_percentage = calculate_percentage(number_of_days)
+      current_cycle_percentage = calculate_percentage(number_of_days)
 
-      until acceptable_time_percentage <= @acceptable_cycle_percentage
+      until current_cycle_percentage <= @acceptable_cycle_percentage
         @time += 1
         return nil unless find_acceptable_time_before(closing_time)
         number_of_days = number_of_days_between(@time, cycle_start_time)
-        acceptable_time_percentage = calculate_percentage(number_of_days)
+        current_cycle_percentage = calculate_percentage(number_of_days)
       end
 
       @uses += 1 if @time
@@ -57,7 +57,7 @@ module IceCubeEx
     end
 
     def calculate_percentage(day_count)
-      value = (day_count.to_f / @cycle.to_f)
+      value      = (day_count.to_f / @cycle.to_f)
       percentage = ((value - value.to_i) * 100).to_i
       percentage.zero? ? 100 : percentage
     end

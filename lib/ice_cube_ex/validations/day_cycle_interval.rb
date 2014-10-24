@@ -8,8 +8,8 @@ module IceCubeEx
         @skip     = normalize(skip)
         @cycle    = normalize(cycle)
 
-        unless @skip < @cycle
-          raise ArgumentError, 'cycle has to be a value higher than skip'
+        unless @skip != @cycle
+          raise ArgumentError, "cycle and skip can't have the same value"
         end
 
         @acceptable_cycle_percentage = ((@skip.to_f / @cycle.to_f) * 100).to_i
