@@ -50,9 +50,9 @@ module IceCubeEx
 
       def normalize(arg)
         arg.to_i.tap do |val|
-          unless val > 1
+          unless val > 0
             raise ArgumentError, "'#{arg}' is not a valid argument. " \
-                                 "Please pass an integer higher than 1."
+                                 "Please pass an integer higher than 0"
           end
         end
       end
